@@ -1,5 +1,6 @@
 <html>
 <head>
+        <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
         <style type="text/css">
             img            {
             height: 10px
@@ -14,6 +15,15 @@ for(var i=0;i<text.length;i++){
     document.write("<img src='JPGS/"+text.charCodeAt(i)+".jpg' height=30/>");
 }
 };
+
+$(document).ready(function(){
+    $('#text').keypress(function(e){
+      if(e.which == 13){
+           fun();
+       }
+    });
+});
+
 </script>
 <form>
 <textarea rows=20 cols=100 id="text"></textarea>
