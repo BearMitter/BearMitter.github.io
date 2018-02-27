@@ -3,26 +3,30 @@
 <head>
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <style type="text/css">
-        img {
-            height: 1000px
+        #dice {
+            height: 800px
+        }
+
+         #button {
+            width: 1000px
         }
     </style>
     <title>Guess Games</title>
 </head>
 
-<img onclick="ran()" src="JPGS/dice/RollDiceButton.jpg">
+<img id="button" onclick="ran()" src="JPGS/dice/RollDiceButton.jpg">
 
-<img id="myImage" src="JPGS/dice/Dice.jpg">
+<img id="dice" src="JPGS/dice/Dice.jpg">
 
 <script>
     function ran() {
-        document.getElementById("myImage").src = "JPGS/dice/RollADice.gif";
+        document.getElementById("dice").src = "JPGS/dice/RollADice.gif";
         var myVar=setTimeout(ran2,3000);
     }
 
        function ran2() {
         var r = Math.floor(Math.random() * 6) + 1;
-        document.getElementById("myImage").src = "JPGS/dice/"+r+".png";
+        document.getElementById("dice").src = "JPGS/dice/"+r+".png";
     }
 </script>
 
