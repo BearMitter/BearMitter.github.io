@@ -1,0 +1,10 @@
+<html>
+    <p id="demo"></p>
+<script>
+    var doomDay=new Date();
+    doomDay.setFullYear(2018,1,25);
+    var total=new Date().getTime()-doomDay.getTime();
+    var numOfDays=total/1000/3600/24;
+    document.getElementById("demo").innerHTML=numOfDays+1;
+</script>
+</html>
