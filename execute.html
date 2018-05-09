@@ -1,16 +1,41 @@
-<html>
-<textarea style='height:100px;width:300px' id='ta'>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Executor</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <textarea id='ta'>
 </textarea>
-<br>
-<button onclick='fun()'>submit</button>
-<br>
-Result: <p id='pa'><p>
-<script>
-function fun(){
-var x=document.getElementById('ta');
-var y=document.getElementById('pa');
-y.innerHTML=eval(x.value.trim());
-eval(x.value);
-}
-</script>
+  <br>
+  <button onclick='exe()'>submit</button>&nbsp
+  <button onclick='clearTA()'>clear</button>
+  <br> Result:
+  <p id='pa'>
+    <p>
+      <script>
+        function exe() {
+          var x = document.getElementById('ta');
+          var y = document.getElementById('pa');
+          with (Math) {
+            y.innerHTML = eval(x.value.trim());
+            eval(x.value);
+          }
+        }
+
+        function clearTA() {
+          document.getElementById("ta").value = "";
+        }
+      </script>
+
+</body>
+
 </html>
