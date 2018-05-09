@@ -1,0 +1,16 @@
+<html>
+<textarea style='height:100px;width:300px' id='ta'>
+</textarea>
+<br>
+<button onclick='fun()'>submit</button>
+<br>
+Result: <p id='pa'><p>
+<script>
+function fun(){
+var x=document.getElementById('ta');
+var y=document.getElementById('pa');
+y.innerHTML=eval(x.value.trim());
+eval(x.value);
+}
+</script>
+</html>
