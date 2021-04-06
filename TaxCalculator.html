@@ -135,22 +135,22 @@
 
             var m1 = mList[0];
 
-            if (m1.salary === '') {
+            if (isBlank(m1.salary)) {
                 alert("Salary can not be empty in month 1");
                 console.log("Salary is Empty");
             }
 
-            if (m1.fundBase === '') {
+            if (isBlank(m1.fundBase)) {
                 m1.fundBase = m1.salary;
             }
 
-            if (m1.deduction === '') {
+            if (isBlank(m1.deduction)) {
                 m1.deduction = 0.0;
             }
-            if (m1.otherIncome === '') {
+            if (isBlank(m1.otherIncome)) {
                 m1.otherIncome = 0.0;
             }
-            if (m1.extraHousingFundRate === '') {
+            if (isBlank(m1.extraHousingFundRate)) {
                 m1.extraHousingFundRate = 0.0;
             }
 
@@ -285,11 +285,19 @@
         }
 
         function parse(text) {
-            if (!text || /^\s*$/.test(text)) {
+            if (isNonBlank(text)) {
                 return '';
             } else {
                 return Number(text);
             }
+        }
+
+        function isNonBlank(text) {
+            return !isBlank(text);
+        }
+
+        function isBlank(text) {
+            return !text || /^\s*$/.test(text);
         }
 
 
