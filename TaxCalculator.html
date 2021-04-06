@@ -285,7 +285,7 @@
         }
 
         function parse(text) {
-            if (isNonBlank(text)) {
+            if (isBlank(text)) {
                 return '';
             } else {
                 return Number(text);
