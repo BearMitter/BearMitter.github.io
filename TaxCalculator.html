@@ -297,7 +297,7 @@
         }
 
         function isBlank(text) {
-            return !text || /^\s*$/.test(text);
+            return text == null || text == undefined || !text || /^\s*$/.test(text);
         }
 
 
