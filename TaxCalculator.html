@@ -164,19 +164,19 @@
 
                 var lastM = mList[i - 2];
 
-                if (m.salary === '') {
+                if (isBlank(m.salary)) {
                     m.salary = lastM.salary;
                 }
-                if (m.deduction === '') {
+                if (isBlank(m.deduction)) {
                     m.deduction = lastM.deduction;
                 }
-                if (m.otherIncome === '') {
+                if (isBlank(m.otherIncome)) {
                     m.otherIncome = 0;
                 }
-                if (m.fundBase === '') {
+                if (isBlank(m.fundBase)) {
                     m.fundBase = lastM.fundBase;
                 }
-                if (m.extraHousingFundRate === '') {
+                if (isBlank(m.extraHousingFundRate)) {
                     m.extraHousingFundRate = lastM.extraHousingFundRate;
                 }
 
