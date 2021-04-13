@@ -52,10 +52,8 @@
         const headerNames = ["月份", "固定计税收入", "当月额外计税收入", "社保登记工资", "补充公积金比例", "专项附加扣除金额", "是否更换公司，是则为1/Y/y/是"];
 
         function drawTable() {
-            // get the reference for the body
-            var div1 = document.getElementById('div1');
 
-            // creates a <table> element
+            var div1 = document.getElementById('div1');
             var tbl = document.createElement("table");
 
             tbl.setAttribute("id", "payrollTable");
@@ -71,18 +69,13 @@
 
             tbl.appendChild(headerRow);
 
-
-            // creating rows
             for (var r = 0; r < totalRows; r++) {
                 var row = document.createElement("tr");
-
-
                 var cell = document.createElement("td");
                 var cellText = document.createTextNode(r + 1);
                 cell.appendChild(cellText);
                 row.appendChild(cell);
 
-                // create cells in row
                 for (var c = 0; c < headerNames.length - 1; c++) {
                     var cell = document.createElement("td");
                     cell.setAttribute("contenteditable", true);
@@ -265,6 +258,44 @@
             var resultText = document.createTextNode(JSON.stringify(mList));
             resultDiv.appendChild(resultText);
 
+        }
+
+
+        function drawTable() {
+
+            var div1 = document.getElementById('result');
+            var tbl = document.createElement("table");
+
+            tbl.setAttribute("id", "resultTable");
+            œ
+            var headerRow = document.createElement("tr");
+
+            for (var i = 0; i < headerNames.length; i++) {
+                var header = document.createElement("th");
+                var cellText = document.createTextNode(headerNames[i]);
+                header.appendChild(cellText);
+                headerRow.appendChild(header);
+            }
+
+            tbl.appendChild(headerRow);
+
+            for (var r = 0; r < totalRows; r++) {
+                var row = document.createElement("tr");
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode(r + 1);
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+
+                for (var c = 0; c < headerNames.length - 1; c++) {
+                    var cell = document.createElement("td");
+                    cell.setAttribute("contenteditable", true);
+                    row.appendChild(cell);
+                }
+
+                tbl.appendChild(row); // add the row to the end of the table body
+            }
+
+            div1.appendChild(tbl); // appends <table> into <div1>
         }
 
 

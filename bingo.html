@@ -1,0 +1,228 @@
+<html>
+
+
+
+
+<audio id="countDownAudio" src="audio/count_down_4321.wav">
+</audio>
+
+<label id="count"> COUNT DOMN </label>
+<P></P>
+<label id="currentNum">*</label>
+
+<button onclick="startG()">Start</button>
+
+<button onclick="pauseOrResume()">Pause</button>
+
+
+<script>
+
+
+    var callTimeOut;
+    var countTimeOut;
+
+    var callStart;
+    var countStart;
+
+    const callDelay = 8000;
+    const countDelay = 1000;
+
+    var callNumber;
+    var countNumber;
+
+    var callRemaining;
+    var countRemaining;
+
+    var pauseFlag = 0;
+
+    // var callTimer;
+    // var countTimer;
+
+
+    // var Timer = function (callback, delay) {
+    //     var timerId, start, remaining = delay;
+
+    //     this.pause = function () {
+    //         window.clearTimeout(timerId);
+    //         remaining -= Date.now() - start;
+    //     };
+
+    //     this.resume = function () {
+    //         start = Date.now();
+    //         window.clearTimeout(timerId);
+    //         timerId = window.setTimeout(callback, remaining);
+    //     };
+
+    //     this.resume();
+    // };
+
+
+
+
+
+
+    var count = document.getElementById("count");
+    var currentNum = document.getElementById("currentNum");
+    var audio = document.getElementById("countDownAudio");
+
+    var list = new Array(75);
+
+    async function startG() {
+
+        count.innerText = "COUNT DOWN";
+        currentNum.innerText = "*";
+
+
+
+
+
+        for (var i = 0; i < 75; i++) {
+            list[i] = i + 1;
+        }
+
+
+        shuffleArray(list);
+        console.log(list);
+
+        callNumber = 75;
+        call(75);
+
+
+
+
+
+
+
+        // for (var i = 0; i < 75; i++) {
+
+        // setTimeout(() => { console.log(j); }, 1000);
+        // audio.play();
+        // currentNum.innerText = list[i];
+
+
+        // count.innerText = 4;
+        // countDown(3);
+
+        // for (var j = 3; j > 0;) {
+        //     count.innerText = j;
+        //     // var v = await sleep(1000);
+        //     setTimeout(function () { console.log(j); j-- }, 1000);
+        // }
+
+
+        // await sleep(7000);
+
+        // setTimeout(() => { console.log(i); }, 7000);
+
+        // }
+
+    }
+
+    function call(number) {
+
+        callStart = Date.now();
+        callRemaining = callDelay;
+        callNumber = number;
+
+        callTimeOut = setTimeout(() => {
+
+
+            if (number == 0) {
+                currentNum.innerText = "Game End";
+            } else {
+                console.log(list[parseInt(number - 1 + "")]);
+                currentNum.innerText = list[number - 1];
+                audio.play();
+                count.innerText = 3;
+                countNumber = 2;
+                countDown(2);
+                call(number - 1);
+            }
+
+        }, Math.min(callRemaining, callDelay));
+
+    }
+
+    function countDown(number) {
+        countStart = Date.now();
+        countRemaining = countDelay;
+        countNumber = number;
+
+        countTimeOut = setTimeout(() => {
+
+            if (number == 0) {
+                currentNum.innerText = "*";
+                count.innerText = "WAITING";
+            } else {
+                count.innerText = number;
+                countDown(number - 1);
+            }
+        }, Math.min(countRemaining, countDelay));
+
+    }
+
+
+    function pauseOrResume() {
+
+        if (pauseFlag == 0) {
+            console.log(callNumber + " pause " + countNumber)
+            callRemaining -= Date.now - callStart;
+
+            window.clearTimeout(callTimeOut);
+
+            if (countNumber > 0) {
+                countRemaining -= Date.now - countStart;
+                window.clearTimeout(countTimeOut);
+            }
+
+
+            pauseFlag = 1;
+        } else {
+            console.log(callNumber + " resume " + countNumber)
+            callStart = Date.now();
+            // setTimeout(call(callNumber), callRemaining);
+            call(callNumber);
+
+            if (countNumber > 0) {
+                countStart = Date.now();
+                countDown(countNumber);
+                // setTimeout(countDown(countNumber), countRemaining);
+            }
+
+
+            pauseFlag = 0;
+
+        }
+
+
+
+
+    }
+
+
+
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    function shuffleArray(array) {
+
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = getRandomInt(i + 1);
+            temp = array[j];
+            array[j] = array[i];
+            array[i] = temp;
+        }
+
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+
+
+</script>
+
+</html>
