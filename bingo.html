@@ -71,7 +71,9 @@ const audio = new Audio();
     async function startG() {
         audio.play();
         audio.src = 'audio/count_down_4321.wav';
-        audio.load();
+        audio.volume = 0.0;
+        audio.play();
+        audio.volume = 1.0;
 
 
 
