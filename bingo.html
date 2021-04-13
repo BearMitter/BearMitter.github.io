@@ -2,10 +2,6 @@
 
 
 
-
-<audio id="countDownAudio" src="audio/count_down_4321.wav">
-</audio>
-
 <label id="count"> COUNT DOMN </label>
 <P></P>
 <label id="currentNum">*</label>
@@ -58,16 +54,24 @@
 
 
 
+const audio = new Audio();
+
+
+
+
 
 
 
     var count = document.getElementById("count");
     var currentNum = document.getElementById("currentNum");
-    var audio = document.getElementById("countDownAudio");
 
     var list = new Array(75);
 
     async function startG() {
+        audio.play();
+
+        audio.src = 'audio/count_down_4321.wav';
+
 
         count.innerText = "COUNT DOWN";
         currentNum.innerText = "*";
