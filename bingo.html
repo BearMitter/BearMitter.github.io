@@ -1,11 +1,8 @@
 <html>
 
-<<<<<<< HEAD
 <audio id="countDownAudio" src="audio/count_down_4321.wav">
 </audio>
-=======
 
->>>>>>> 92bc14c0c354b5449997d679a27a395af87153d2
 
 <label id="count"> COUNT DOMN </label>
 <p></p>
@@ -36,48 +33,15 @@
 
     var pauseFlag = 0;
 
-<<<<<<< HEAD
-=======
-    // var callTimer;
-    // var countTimer;
+    const audio = new Audio();
 
-
-    // var Timer = function (callback, delay) {
-    //     var timerId, start, remaining = delay;
-
-    //     this.pause = function () {
-    //         window.clearTimeout(timerId);
-    //         remaining -= Date.now() - start;
-    //     };
-
-    //     this.resume = function () {
-    //         start = Date.now();
-    //         window.clearTimeout(timerId);
-    //         timerId = window.setTimeout(callback, remaining);
-    //     };
-
-    //     this.resume();
-    // };
-
-
-
-const audio = new Audio();
-
-
-
-
-
-
-
-
->>>>>>> 92bc14c0c354b5449997d679a27a395af87153d2
     var count = document.getElementById("count");
     var currentNum = document.getElementById("currentNum");
 
     var list = new Array(75);
 
     async function startG() {
-        audio.volume=0.0;
+        audio.volume = 0.0;
         audio.play();
         audio.src = 'audio/count_down_4321.wav';
         audio.volume = 0.0;
