@@ -1,8 +1,5 @@
 <html>
 
-
-
-
 <audio id="countDownAudio" src="audio/count_down_4321.wav">
 </audio>
 
@@ -35,32 +32,6 @@
 
     var pauseFlag = 0;
 
-    // var callTimer;
-    // var countTimer;
-
-
-    // var Timer = function (callback, delay) {
-    //     var timerId, start, remaining = delay;
-
-    //     this.pause = function () {
-    //         window.clearTimeout(timerId);
-    //         remaining -= Date.now() - start;
-    //     };
-
-    //     this.resume = function () {
-    //         start = Date.now();
-    //         window.clearTimeout(timerId);
-    //         timerId = window.setTimeout(callback, remaining);
-    //     };
-
-    //     this.resume();
-    // };
-
-
-
-
-
-
     var count = document.getElementById("count");
     var currentNum = document.getElementById("currentNum");
     var audio = document.getElementById("countDownAudio");
@@ -71,10 +42,6 @@
 
         count.innerText = "COUNT DOWN";
         currentNum.innerText = "*";
-
-
-
-
 
         for (var i = 0; i < 75; i++) {
             list[i] = i + 1;
@@ -87,34 +54,6 @@
         callNumber = 75;
         call(75);
 
-
-
-
-
-
-
-        // for (var i = 0; i < 75; i++) {
-
-        // setTimeout(() => { console.log(j); }, 1000);
-        // audio.play();
-        // currentNum.innerText = list[i];
-
-
-        // count.innerText = 4;
-        // countDown(3);
-
-        // for (var j = 3; j > 0;) {
-        //     count.innerText = j;
-        //     // var v = await sleep(1000);
-        //     setTimeout(function () { console.log(j); j-- }, 1000);
-        // }
-
-
-        // await sleep(7000);
-
-        // setTimeout(() => { console.log(i); }, 7000);
-
-        // }
 
     }
 
@@ -194,12 +133,7 @@
 
         }
 
-
-
-
     }
-
-
 
 
     function getRandomInt(max) {
