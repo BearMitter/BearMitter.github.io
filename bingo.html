@@ -10,7 +10,7 @@
 
 <button onclick="startG()">Start</button>
 
-<button onclick="pauseOrResume()">Pause</button>
+<button id="pauseButton" onclick="pauseOrResume()">Pause</button>
 
 
 <script>
@@ -41,14 +41,10 @@
     var list = new Array(75);
 
     async function startG() {
-        audio.volume = 0.0;
+
         audio.play();
         audio.src = 'audio/count_down_4321.wav';
-        audio.volume = 0.0;
-        audio.play();
-        audio.volume = 1.0;
-
-
+        audio.load();
 
         count.innerText = "COUNT DOWN";
         currentNum.innerText = "*";
@@ -113,7 +109,12 @@
 
     function pauseOrResume() {
 
+        var pauseButton = document.getElementById("pauseButton");
+
+
         if (pauseFlag == 0) {
+
+
             console.log(callNumber + " pause " + countNumber)
             callRemaining -= Date.now - callStart;
 
@@ -126,6 +127,7 @@
 
 
             pauseFlag = 1;
+            pauseButton.innerText = "Resume";
         } else {
             console.log(callNumber + " resume " + countNumber)
             callStart = Date.now();
@@ -140,6 +142,7 @@
 
 
             pauseFlag = 0;
+            pauseButton.innerText = "Pause";
 
         }
 
