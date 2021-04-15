@@ -2,42 +2,46 @@
 
 
 <head>
-    <link rel="stylesheet" href="css/bootstrap/3.3.6/bootstrap.min.css" type="text/css" media="screen" />
+    <!-- <link rel="stylesheet" href="css/bootstrap/3.3.6/bootstrap.min.css" type="text/css" media="screen" /> -->
+
+    <link rel="stylesheet" href="css/bootstrap/5.0.0-beta3/bootstrap.min.css" type="text/css" media="screen" />
 
     <style type="text/css">
         .button {
             width: 100%;
             height: 100%;
-            display: block;
+            /* display: block; */
         }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12 text-center" style="height:30%;">Top </div>
+        <div class="row" style="height:30%;">
+            <div class="col text-center align-middle" style="vertical-align:middle;">Top </div>
         </div>
-        <div class="row">
-            <div class="col-xs-8 bg-info" style="height:35%;">
-                <label id="hisNums">*</label>
+        <div class="row" style="height:35%;">
+            <div class="col-8 bg-info">
+                <label id="hisNums">Records: </label>
             </div>
-            <div calss="col">
-                <div class="col-xs-4 bg-primary" style="height:17.5%;">
+
+            <div class="col">
+                <div calss="row bg-primary" style="height:50%;">
                     <label id="currentNum">WAITING</label>
                 </div>
-                <div class="col-xs-4 bg-warning" style="height:17.5%;">
+                <div class="row bg-warning" style="height:50%;">
                     <label id="count">COUNT DOWN</label>
                 </div>
+
             </div>
 
         </div>
 
-        <div class="row">
-            <div class="col-xs-6 bg-success" style="height:35%;">
+        <div class="row" style="height:35%;">
+            <div class="col-6 bg-success">
                 <div class="button" onclick="startG()">Start</div>
             </div>
-            <div class="col-xs-6 bg-danger" style="height:35%;">
+            <div class="col-6 bg-danger">
                 <div class="button" id="pauseButton" onclick="pauseOrResume()">Pause</div>
             </div>
         </div>
@@ -70,10 +74,13 @@
 
     var count = document.getElementById("count");
     var currentNum = document.getElementById("currentNum");
+    var hisNums = document.getElementById("hisNums");
 
     var list = new Array(75);
 
     async function startG() {
+
+        hisNums.innerText = "Records: ";
 
         audio.play();
         audio.src = 'audio/count_down_4321.wav';
@@ -133,6 +140,7 @@
                 count.innerText = "WAITING";
             } else {
                 count.innerText = number;
+                hisNums.innerText = hisNums.innerText + " " + number;
                 countDown(number - 1);
             }
         }, Math.min(countRemaining, countDelay));
