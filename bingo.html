@@ -4,9 +4,6 @@
 <head>
     <link rel="stylesheet" href="css/bootstrap/3.3.6/bootstrap.min.css" type="text/css" media="screen" />
 
-
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-
     <style type="text/css">
         .button {
             width: 100%;
@@ -19,13 +16,16 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-12 text-center bg-primary" style="height:30%;">Top </div>
+            <div class="col-xs-12 text-center" style="height:30%;">Top </div>
         </div>
         <div class="row">
-            <div class="col-xs-10 bg-warning" style="height:20%;">
-                <label id="currentNum">*</label>
+            <div class="col-xs-8 bg-info" style="height:20%;">
+                <label id="hisNums">*</label>
             </div>
-            <div class="col-xs-2 bg-info" style="height:20%;">
+            <div class="col-xs-2 bg-primary" style="height:20%;">
+                <label id="currentNum">WAITING</label>
+            </div>
+            <div class="col-xs-2 bg-warning" style="height:20%;">
                 <label id="count">COUNT DOWN</label>
             </div>
         </div>
@@ -41,14 +41,6 @@
 
     </div>
 </body>
-
-
-
-
-
-
-
-
 
 
 <script>
