@@ -4,6 +4,10 @@ for (var i = 0; i < 75; i++) {
     list[i] = i + 1;
 }
 
+test("Returns about-us for english language", () => {
+    expect(getAboutUsLink("en-US")).toBe("/about-us");
+});
+
 
 shuffleArray(list);
 
