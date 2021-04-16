@@ -2,7 +2,7 @@
 
 
 <head>
-    <meta http-equiv="refresh" content="5">
+    <!-- <meta http-equiv="refresh" content="5"> -->
     <!-- <link rel="stylesheet" href="css/bootstrap/3.3.6/bootstrap.min.css" type="text/css" media="screen" /> -->
 
     <link rel="stylesheet" href="css/bootstrap/5.0.0-beta3/bootstrap.min.css" type="text/css" media="screen" />
@@ -23,41 +23,54 @@
 
 
 
-<body>
+<body >
     <div class="container-fluid">
-        <div class="row" style="height:30%;">
-            <!-- <img class="container_img" src="JPGS/bingo/banner.jpg"></img> -->
+        <div class="row flex-fill" style="height:30%;object-fit:fill;">
+            <img class="container_img" style="object-fit: fill;" src="JPGS/bingo/8bit.gif"></img>
         </div>
         <div class="row" style="height:35%;">
-            <div class="col-8 bg-info">
-                <div id="hisNums" classm="text-justify" style="font-size:3rem">Records: </div>
+
+          
+
+            <div class="col-8 " style="background-color: #a692e5;">
+                <div id="hisNums" class="text-justify text-light" style="font-size:3rem;">Records: </div>
             </div>
 
-            <div class="col">
-                <div calss="row bg-primary  fs-1 text-center" style="height:50%;">
-                    <label class="flex-fill align-middle " id="currentNum"
-                        style="max-width:100%; margin: 0;padding: 0;font-size:10rem">
-                        C
-                    </label>
-                </div>
-                <div class="row bg-warning fs-1 text-center" style="height:50%;">
-                    <label class="flex-fill align-middle " id="count"
-                        style="max-width:100%; margin: 0;padding: 0;font-size:10rem">
+            <div class="col-4">
+
+              
+                <div class="row fs-1 text-center" style="height:50%;background-color:#efbf64">
+                    <label class="flex-fill align-middle text-light" id="currentNum"
+                        style="max-width:100%; margin: 0;padding: 0;font-size:2em">
                         N
                     </label>
                 </div>
 
+                <div class="row fs-1 text-center" style="height:50%;background-color:#6c4a47">
+                    <label class="flex-fill align-middle text-light " id="count"
+                        style="max-width:100%; margin: 0;padding: 0;font-size:2em">
+                        C
+                    </label>
+                </div>
+
+                <!-- <div calss="row bg-warning fs-1 text-center" style="height:50%;">
+                    <label class="flex-fill align-middle " id="currentNum"
+                        style="max-width:100%; margin: 0;padding: 0;font-size:5em">
+                        N
+                    </label>
+                </div> -->
+
             </div>
 
         </div>
 
         <div class="row" style="height:35%;">
-            <div class="col-6 bg-success">
-                <div class="button" onclick="startG()" style="font-size:12rem">Start</div>
+            <div class="col-6 " style ="background-color: #7ed880;">
+                <div id="startButton" class="button text-light" onclick="startG()" style="font-size:6rem;">START</div>
             </div>
-            <div class="col-6 bg-danger">
-                <div class="button text-justify" id="pauseButton" style="font-size:8rem" onclick="pauseOrResume()">
-                    Pause / Resume
+            <div class="col-6 " style ="background-color: #d95c50;">
+                <div class="button text-justify text-light" id="pauseButton" style="font-size:6em;" onclick="pauseOrResume()">
+                    PAUSE
                 </div>
             </div>
         </div>
@@ -68,6 +81,14 @@
 
 <script>
 
+// window.onload = function() {
+//     const bgm = new Audio();
+//         bgm.src='audio/pyc-music-coffee-shop.mp3';
+//         bgm.loop = true;
+//         bgm.load();
+// }
+
+    
 
     var callTimeOut;
     var countTimeOut;
@@ -88,15 +109,47 @@
 
     const audio = new Audio();
 
+    const bgm = new Audio();
+    bgm.src='audio/pyc-music-coffee-shop.mp3';
+        bgm.loop = true;
+        bgm.load();
+
+    var startButton = document.getElementById("startButton");
+
     var count = document.getElementById("count");
     var currentNum = document.getElementById("currentNum");
     var hisNums = document.getElementById("hisNums");
 
+    var playTimes =1;
+
     var list = new Array(75);
+
+    var endFlag=0;
+
 
     async function startG() {
 
+
+
+        if(endFlag == 0){
+            startButton.innerHTML="END";
+            endFlag =1;
+            bgm.play();
+        }else{
+            window.location.reload();
+            // bgm.pause(); 
+            // startButton.innerHTML="START";
+            // endFlag=0;
+        }
+
+        
+
+
+
         hisNums.innerText = "Records: ";
+
+       
+
 
         audio.play();
         audio.src = 'audio/count_down_4321.wav';
@@ -154,7 +207,7 @@
 
             if (number == 0) {
                 currentNum.innerText = "N";
-                count.innerText = "C";
+                count.innerText = "C"; 
             } else {
                 count.innerText = number;
                 countDown(number - 1);
@@ -170,8 +223,8 @@
 
 
         if (pauseFlag == 0) {
-
-
+            bgm.pause();
+            audio.pause();
             console.log(callNumber + " pause " + countNumber)
             callRemaining -= Date.now - callStart;
 
@@ -184,8 +237,11 @@
 
 
             pauseFlag = 1;
-            pauseButton.innerText = "Resume";
+            pauseButton.innerText = "RESUME";
         } else {
+            bgm.play();
+            // audio.play();
+            
             console.log(callNumber + " resume " + countNumber)
             callStart = Date.now();
             // setTimeout(call(callNumber), callRemaining);
@@ -199,7 +255,7 @@
 
 
             pauseFlag = 0;
-            pauseButton.innerText = "Pause";
+            pauseButton.innerText = "PAUSE";
 
         }
 
