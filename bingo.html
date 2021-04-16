@@ -23,32 +23,35 @@
 
 
 
-<body >
+
+
+<body>
     <div class="container-fluid">
-        <div class="row flex-fill" style="height:30%;object-fit:fill;">
-            <img class=" img-fluid container_img border border-warning border-4" style="object-fit: fill;" src="JPGS/bingo/8bit.gif"></img>
+        <div class="row flex-fill" style="height:30%;object-fit:fill;background-color:#6e757c">
+            <img class=" img-fluid container_img border border-secondary border-3" style="object-fit: fill;"
+                src="JPGS/bingo/8bit.gif"></img>
         </div>
-        <div class="row" style="height:35%;">
+        <div class="row" style="height:40%;">
 
-          
 
-            <div class="col-8 " style="background-color: #a692e5;">
-                <div id="hisNums" class="text-justify text-light" style="font-size:3em;">Records: </div>
+
+            <div class="col-8 border border-secondary border-3" style="background-color: #a692e5;">
+                <div id="hisNums" class="text-justify text-light " style="font-size:2em;">Records: </div>
             </div>
 
             <div class="col-4">
 
-              
-                <div class="row fs-1 text-center" style="height:50%;background-color:#efbf64">
+
+                <div class="row fs-1 text-center border border-secondary border-3" style="height:50%;background-color:#efbf64">
                     <label class="flex-fill align-middle text-light" id="currentNum"
-                        style="max-width:100%; margin: 0;padding: 0;font-size:4em">
+                        style="max-width:100%; margin: 0;padding: 0;font-size:2em">
                         N
                     </label>
                 </div>
 
-                <div class="row fs-1 text-center" style="height:50%;background-color:#6c4a47">
+                <div class="row fs-1 text-center border border-secondary border-3" style="height:50%;background-color:#6c4a47">
                     <label class="flex-fill align-middle text-light " id="count"
-                        style="max-width:100%; margin: 0;padding: 0;font-size:4em">
+                        style="max-width:100%; margin: 0;padding: 0;font-size:2em">
                         C
                     </label>
                 </div>
@@ -64,12 +67,13 @@
 
         </div>
 
-        <div class="row" style="height:35%;">
-            <div class="col-6 " style ="background-color: #7ed880;">
+        <div class="row" style="height:30%;">
+            <div class="col-6 border border-secondary border-3" style="background-color: #7ed880;">
                 <div id="startButton" class="button text-light" onclick="startG()" style="font-size:7rem;">START</div>
             </div>
-            <div class="col-6 " style ="background-color: #d95c50;">
-                <div class="button text-justify text-light" id="pauseButton" style="font-size:7em;" onclick="pauseOrResume()">
+            <div class="col-6 border border-secondary border-3" style="background-color: #d95c50;">
+                <div class="button text-justify text-light" id="pauseButton" style="font-size:7em;"
+                    onclick="pauseOrResume()">
                     PAUSE
                 </div>
             </div>
@@ -81,14 +85,14 @@
 
 <script>
 
-// window.onload = function() {
-//     const bgm = new Audio();
-//         bgm.src='audio/pyc-music-coffee-shop.mp3';
-//         bgm.loop = true;
-//         bgm.load();
-// }
+    // window.onload = function() {
+    //     const bgm = new Audio();
+    //         bgm.src='audio/pyc-music-coffee-shop.mp3';
+    //         bgm.loop = true;
+    //         bgm.load();
+    // }
 
-    
+
 
     var callTimeOut;
     var countTimeOut;
@@ -110,9 +114,9 @@
     const audio = new Audio();
 
     const bgm = new Audio();
-    bgm.src='audio/pyc-music-coffee-shop.mp3';
-        bgm.loop = true;
-        bgm.load();
+    bgm.src = 'audio/pyc-music-coffee-shop.mp3';
+    bgm.loop = true;
+    bgm.load();
 
     var startButton = document.getElementById("startButton");
 
@@ -120,38 +124,43 @@
     var currentNum = document.getElementById("currentNum");
     var hisNums = document.getElementById("hisNums");
 
-    var playTimes =1;
+    var playTimes = 1;
 
     var list = new Array(75);
 
-    var endFlag=0;
+    var endFlag = 0;
+
+    var initFlag =1;
 
 
     async function startG() {
 
 
 
-        if(endFlag == 0){
-            startButton.innerHTML="END";
-            endFlag =1;
+        if (endFlag == 0) {
+            startButton.innerHTML = "END";
+            endFlag = 1;
             bgm.play();
-        }else{
-            window.location.reload();
+        } else {
+            var r = confirm("Confirm to restart?");
+            if (r == true) {
+                txt = "You pressed OK!";
+                window.location.reload();
+            } else {
+                txt = "You pressed Cancel!";
+            }
+
             // bgm.pause(); 
             // startButton.innerHTML="START";
             // endFlag=0;
         }
 
-        
+
 
 
 
         hisNums.innerText = "Records: ";
 
-       
-
-
-        audio.play();
         audio.src = 'audio/count_down_4321.wav';
         audio.load();
 
@@ -185,7 +194,13 @@
             } else {
                 console.log(list[parseInt(number - 1 + "")]);
                 currentNum.innerText = list[number - 1];
-                hisNums.innerText = hisNums.innerText + " " + list[number - 1];
+                if(initFlag == 1 ){
+                    hisNums.innerText =  hisNums.innerText + " " + list[number - 1];
+                    initFlag=0;
+                }else{
+                    hisNums.innerText =  hisNums.innerText + ", " + list[number - 1];
+                }
+                
 
                 audio.play();
                 count.innerText = 3;
@@ -207,7 +222,7 @@
 
             if (number == 0) {
                 currentNum.innerText = "N";
-                count.innerText = "C"; 
+                count.innerText = "C";
             } else {
                 count.innerText = number;
                 countDown(number - 1);
@@ -224,7 +239,7 @@
 
         if (pauseFlag == 0) {
             bgm.pause();
-            audio.pause();
+            // audio.pause();
             console.log(callNumber + " pause " + countNumber)
             callRemaining -= Date.now - callStart;
 
@@ -241,7 +256,7 @@
         } else {
             bgm.play();
             // audio.play();
-            
+
             console.log(callNumber + " resume " + countNumber)
             callStart = Date.now();
             // setTimeout(call(callNumber), callRemaining);
