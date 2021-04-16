@@ -2,6 +2,7 @@
 
 
 <head>
+    <meta http-equiv="refresh" content="5">
     <!-- <link rel="stylesheet" href="css/bootstrap/3.3.6/bootstrap.min.css" type="text/css" media="screen" /> -->
 
     <link rel="stylesheet" href="css/bootstrap/5.0.0-beta3/bootstrap.min.css" type="text/css" media="screen" />
@@ -25,19 +26,25 @@
 <body>
     <div class="container-fluid">
         <div class="row" style="height:30%;">
-            <img class="container_img" src="JPGS/bingo/banner.jpg"></img>
+            <!-- <img class="container_img" src="JPGS/bingo/banner.jpg"></img> -->
         </div>
         <div class="row" style="height:35%;">
             <div class="col-8 bg-info">
-                <label id="hisNums">Records: </label>
+                <div id="hisNums" classm="text-justify" style="font-size:3rem">Records: </div>
             </div>
 
             <div class="col">
-                <div calss="row bg-primary" style="height:50%;">
-                    <label id="currentNum">WAITING</label>
+                <div calss="row bg-primary  fs-1 text-center" style="height:50%;">
+                    <label class="flex-fill align-middle " id="currentNum"
+                        style="max-width:100%; margin: 0;padding: 0;font-size:10rem">
+                        C
+                    </label>
                 </div>
-                <div class="row bg-warning" style="height:50%;">
-                    <label id="count">COUNT DOWN</label>
+                <div class="row bg-warning fs-1 text-center" style="height:50%;">
+                    <label class="flex-fill align-middle " id="count"
+                        style="max-width:100%; margin: 0;padding: 0;font-size:10rem">
+                        N
+                    </label>
                 </div>
 
             </div>
@@ -46,10 +53,12 @@
 
         <div class="row" style="height:35%;">
             <div class="col-6 bg-success">
-                <div class="button" onclick="startG()">Start</div>
+                <div class="button" onclick="startG()" style="font-size:12rem">Start</div>
             </div>
             <div class="col-6 bg-danger">
-                <div class="button" id="pauseButton" onclick="pauseOrResume()">Pause</div>
+                <div class="button text-justify" id="pauseButton" style="font-size:8rem" onclick="pauseOrResume()">
+                    Pause / Resume
+                </div>
             </div>
         </div>
 
@@ -93,8 +102,8 @@
         audio.src = 'audio/count_down_4321.wav';
         audio.load();
 
-        count.innerText = "COUNT DOWN";
-        currentNum.innerText = "*";
+        count.innerText = "C";
+        currentNum.innerText = "N";
 
         for (var i = 0; i < 75; i++) {
             list[i] = i + 1;
@@ -144,8 +153,8 @@
         countTimeOut = setTimeout(() => {
 
             if (number == 0) {
-                currentNum.innerText = "*";
-                count.innerText = "WAITING";
+                currentNum.innerText = "N";
+                count.innerText = "C";
             } else {
                 count.innerText = number;
                 countDown(number - 1);
