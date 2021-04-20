@@ -22,7 +22,8 @@
   <script src="../js/bootstrap/5.0.0-beta3/bootstrap.min.js"></script>
 
   <textarea class="form-control" style="min-width: 100%;height: 30%" id='ta'>
-</textarea> Result:
+
+  </textarea> Result:
   <p id='pa'></p>
   <button class="btn btn-primary" onclick='exe()'>Submit ⌘+↵</button>
   <button class="btn btn-primary" onclick='clearTA()'>Clear ⌘+\</button>
@@ -217,11 +218,11 @@
   <script>
 
 
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    if (isMobile) {
-      textArea.readonly = true;
-    }
+    // if (isMobile) {
+    //   textArea.readonly = true;
+    // }
 
 
 
@@ -348,7 +349,7 @@
       var start = $('#ta').prop('selectionStart');
       textArea.value = taValue.substring(0, start) + id + taValue.substring(start, taValue.length);
       textArea.setSelectionRange(start + id.length, start + id.length);
-      textArea.focus();
+      // textArea.focus();
     }
 
 
