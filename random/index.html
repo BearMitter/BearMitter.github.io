@@ -14,19 +14,19 @@
     <title>Guess Games</title>
 </head>
 
-<img id="button" onclick="ran()" src="../JPGS/dice/RollDiceButton.jpg">
+<img id="button" onclick="ran()" src="../picture/dice/RollDiceButton.jpg">
 
-<img id="dice" src="../JPGS/dice/dice.jpg">
+<img id="dice" src="../picture/dice/dice.jpg">
 
 <script>
     function ran() {
-        document.getElementById("dice").src = "../JPGS/dice/RollADice.gif";
+        document.getElementById("dice").src = "../picture/dice/RollADice.gif";
         var myVar = setTimeout(ran2, 3000);
     }
 
     function ran2() {
         var r = Math.floor(Math.random() * 6) + 1;
-        document.getElementById("dice").src = "../JPGS/dice/" + r + "a.png";
+        document.getElementById("dice").src = "../picture/dice/" + r + "a.png";
     }
 </script>
 
