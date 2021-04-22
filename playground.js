@@ -1,12 +1,27 @@
+console.log("hello")
+
+
+console.log(Math.E);
+
+console.log(Math.sign(-324));
+
+
+var arr = [1, 2, 3];
+
+arr.splice(3, 0, 4);
+
+console.log(arr);
+
+
+
+
 var list = new Array(75);
 
 for (var i = 0; i < 75; i++) {
     list[i] = i + 1;
 }
 
-test("Returns about-us for english language", () => {
-    expect(getAboutUsLink("en-US")).toBe("/about-us");
-});
+
 
 
 shuffleArray(list);
