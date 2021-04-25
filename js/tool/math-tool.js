@@ -47,3 +47,5 @@ function stddev(...nums) {
     return Math.sqrt(sum / nums.length);
 
 }
+
+

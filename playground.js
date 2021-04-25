@@ -22,8 +22,6 @@ for (var i = 0; i < 75; i++) {
 }
 
 
-
-
 shuffleArray(list);
 
 

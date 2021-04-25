@@ -1,0 +1,77 @@
+<html>
+
+<head>
+
+    <script type="text/javascript" src="/js/tool/equal-repayment.js"></script>
+
+
+</head>
+
+
+
+<body>
+
+
+
+    <p>Terms:</p>
+    <input id='terms' />
+
+
+    <p>Principal:</p>
+    <input id='principal' />
+
+    <p>AnnualRate:</p>
+    <input id='annualRate' />
+
+
+
+    <button onclick="calculate()"></button>
+
+    <div id="result"> Result:</div>
+
+
+    <script>
+
+        var result = document.getElementById("result");
+
+        function calculate() {
+
+            var principal = document.getElementById("principal").innerText;
+            var terms = document.getElementById("terms").innerText;
+            var annualRate = document.getElementById("annualRate").innerText;
+
+
+            var res = getAmortizationBills(principal, annualRate, terms, undefined, undefined, undefined);
+
+
+            var sum = 0;
+            for (var i = 0; i < res.length; i++) {
+                var map = res[i];
+
+                console.log(map.get("i"));
+                sum += parse(res[i].get("i"));
+            }
+
+            console.log(res);
+
+            result.innerHTML = sum;
+
+
+
+        }
+
+
+        function parse(text) {
+            if (isBlank(text)) {
+                return '';
+            } else {
+                return Number(text);
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
