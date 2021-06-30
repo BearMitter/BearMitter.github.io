@@ -13,8 +13,6 @@ arr.splice(3, 0, 4);
 console.log(arr);
 
 
-
-
 var list = new Array(75);
 
 for (var i = 0; i < 75; i++) {
