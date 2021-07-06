@@ -17,7 +17,6 @@ function deg(n) {
 }
 
 
-
 function count(...nums) {
     return nums.length;
 }

@@ -1,8 +1,41 @@
-<html>
+<!DOCTYPE html>
 
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script type="text/javascript" src="/js/tool/equal-repayment.js"></script>
+
+    <!-- <link href="../css/bootstrap/5.0.0-beta3/bootstrap.min.css" rel="stylesheet"> -->
+    <script type="text/javascript" src="../js/tool/equal-repayment.js"></script>
+    <script type="text/javascript" src="../js/tool/common.js"></script>
+
+
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid #7f7f7f;
+        }
+
+        td {
+            border: 1px solid #7f7f7f;
+            width: 150px;
+            height: 30px;
+            text-align: center;
+        }
+
+        th {
+            border: 1px solid #7f7f7f;
+            width: 150px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
 
 
 </head>
@@ -13,64 +46,88 @@
 
 
 
-    <p>Terms:</p>
-    <input id='terms' />
+    <p>Terms: <input id='terms' /></p>
 
 
-    <p>Principal:</p>
-    <input id='principal' />
-
-    <p>AnnualRate:</p>
-    <input id='annualRate' />
+    <p>Term Duration(D,W,M,Y) e.g. 5W, 12M. Default 1M:<input id='duration' /></p>
 
 
+    <p>Principal: <input id='principal' /></p>
 
-    <button onclick="calculate()"></button>
+
+    <p>AnnualRate: <input id='annualRate' /> or TermRate:<input id='termRate' /></p>
+
+
+    <p>Payment Method: <select class="form-select" aria-label="Default select example">
+            <option value="equalRepayment" selected>Equal Repayment</option>
+            <option value="equalPrincipal">Equal Principal</option>
+        </select></p>
+
+    <p>StartDate: <input type="text" id="datepicker-13"></p>
+
+    <p>Day-Count conventions: 1 year has <select class="form-select" aria-label="Default select example">
+            <option value="360" selected>360</option>
+            <option value="365">365</option>
+            <option value="Actual">Actual</option>
+        </select>days;
+        1 month has <select class="form-select" aria-label="Default select example">
+            <option value="30" selected>30</option>
+            <option value="Actual">Actual</option>
+        </select> days;
+    </p>
+
+
+    </br>
+    <button type="button" class="btn btn-info" onclick="calculate()">
+        calculate
+    </button>
+
 
     <div id="result"> Result:</div>
 
 
     <script>
 
-        var result = document.getElementById("result");
+        $(function () {
+            $("#datepicker-13").datepicker();
+        });
+
 
         function calculate() {
+
+            document.getElementById("result").innerText = "";
 
             var principal = document.getElementById("principal").innerText;
             var terms = document.getElementById("terms").innerText;
             var annualRate = document.getElementById("annualRate").innerText;
 
 
-            var res = getAmortizationBills(principal, annualRate, terms, undefined, undefined, undefined);
+            var res = getAmortizationBills(100, 0.1, 100, null, null, null);
+
+            // var res = getAmortizationBills(principal, annualRate, terms, null, null, null);
+
+
 
 
             var sum = 0;
+            var resultStr = 'terms,interest,principal,remaingPrincipa</br>';
+
+            var arr = [];
+            var header = ["terms", "interest", "principal", "remaining principal", "interest paid ", "principal paid"];
+            arr.push(header);
+
+
+            var interestPaid = 0;
+            var principalPaid = 0;
+
+
             for (var i = 0; i < res.length; i++) {
-                var map = res[i];
-
-                console.log(map.get("i"));
-                sum += parse(res[i].get("i"));
-            }
-
-            console.log(res);
-
-            result.innerHTML = sum;
-
-
-
-        }
-
-
-        function parse(text) {
-            if (isBlank(text)) {
-                return '';
-            } else {
-                return Number(text);
-            }
-        }
-
-
-    </script>
+                var map = res[i]; interestPaid = round(interestPaid + map.get("i"), 2);
+                principalPaid = round(principalPaid + map.get("p"), 2); var rowData = [i + 1, map.get("i"), map.get("p"),
+                map.get("remainP"), interestPaid, principalPaid]; arr.push(rowData);
+            } drawTable("result", arr);
+        } function
+            parse(text) { if (isBlank(text)) { return ''; } else { return Number(text); } }</script>
 
 </body>
 

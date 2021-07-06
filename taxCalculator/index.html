@@ -51,6 +51,9 @@
         var totalRows = 12;
         const headerNames = ["月份", "固定计税收入", "当月额外计税收入", "社保登记工资", "补充公积金比例", "专项附加扣除金额", "是否更换公司，是则为1/Y/y/是"];
 
+        const resultHeaderNames = ["月份", "固定计税收入", "当月额外计税收入", "社保登记工资", "补充公积金比例", "专项附加扣除金额", "是否更换公司，是则为1/Y/y/是",
+            "纳税收入", "社保公积金缴费", "个人所得税", "到手收入"];
+
         function drawTable() {
 
             var div1 = document.getElementById('div1');
@@ -255,23 +258,29 @@
 
 
             var resultDiv = document.getElementById("result");
-            var resultText = document.createTextNode(JSON.stringify(mList));
-            resultDiv.appendChild(resultText);
+            // var resultText = document.createTextNode(JSON.stringify(mList));
+            // resultDiv.appendChild(resultText);
+
+            drawResultTable(mList);
 
         }
 
 
-        function drawTable() {
+        function drawResultTable(mList) {
+
+
+            console.log(mList)
 
             var div1 = document.getElementById('result');
-            var tbl = document.createElement("table");
+            var tbl = document.createElement("resultTable");
 
             tbl.setAttribute("id", "resultTable");
+
             var headerRow = document.createElement("tr");
 
-            for (var i = 0; i < headerNames.length; i++) {
+            for (var i = 0; i < resultHeaderNames.length; i++) {
                 var header = document.createElement("th");
-                var cellText = document.createTextNode(headerNames[i]);
+                var cellText = document.createTextNode(resultHeaderNames[i]);
                 header.appendChild(cellText);
                 headerRow.appendChild(header);
             }
@@ -280,21 +289,77 @@
 
             for (var r = 0; r < totalRows; r++) {
                 var row = document.createElement("tr");
-                var cell = document.createElement("td");
-                var cellText = document.createTextNode(r + 1);
-                cell.appendChild(cellText);
-                row.appendChild(cell);
 
-                for (var c = 0; c < headerNames.length - 1; c++) {
-                    var cell = document.createElement("td");
-                    cell.setAttribute("contenteditable", true);
-                    row.appendChild(cell);
-                }
+                appendCell(row, mList[r].month);
+                appendCell(row, mList[r].salary);
+                appendCell(row, mList[r].otherIncome);
+                appendCell(row, mList[r].fundBase);
+                appendCell(row, mList[r].extraHousingFundRate);
+                appendCell(row, mList[r].deduction);
+                appendCell(row, mList[r].changeCompany);
+                appendCell(row, mList[r].income);
+                appendCell(row, mList[r].fund);
+                appendCell(row, mList[r].tax);
+                appendCell(row, mList[r].received);
+
 
                 tbl.appendChild(row); // add the row to the end of the table body
             }
 
+
+            var totalSalary = round(mList.map(x => x.salary).reduce((a, b) => a + b));
+            var totalOtherIncome = round(mList.map(x => x.otherIncome).reduce((a, b) => a + b));
+            var totalDeduction = round(mList.map(x => x.deduction).reduce((a, b) => a + b));
+            var totalIncome = round(mList.map(x => x.income).reduce((a, b) => a + b));
+            var totalFund = round(mList.map(x => x.fund).reduce((a, b) => a + b));
+            var totalTax = round(mList.map(x => x.tax).reduce((a, b) => a + b));
+            var totalReceived = round(mList.map(x => x.received).reduce((a, b) => a + b));
+
+            csv = csv + "\n" + "总计, " + totalSalary + ", " + totalOtherIncome + ", N, N, " + totalDeduction + ", N, " + totalIncome + ", "
+                + totalFund + "," + totalTax + "," + totalReceived;
+
+
+
+            var row = document.createElement("tr");
+
+            appendCell(row, "SUM");
+            appendCell(row, totalSalary);
+            appendCell(row, totalOtherIncome);
+            appendCell(row, "N");
+            appendCell(row, "N");
+            appendCell(row, totalDeduction);
+            appendCell(row, "N");
+            appendCell(row, totalIncome);
+            appendCell(row, totalFund);
+            appendCell(row, totalTax);
+            appendCell(row, totalReceived);
+
+
+            tbl.appendChild(row);
+
+
             div1.appendChild(tbl); // appends <table> into <div1>
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+        function appendCell(row, text) {
+
+            var cell = document.createElement("td");
+            cell.setAttribute("contenteditable", false);
+            var cellText = document.createTextNode(text);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+
         }
 
 
