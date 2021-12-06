@@ -22,12 +22,13 @@ function round(value, exp) {
 
 
 function nonEffective(n) {
+    console.log(n);
     return n === undefined || n == null;
 }
 
 
 function isBlank(text) {
-    return text == null || text == undefined || !text || /^\s*$/.test(text);
+    return text == null || text === undefined || !text || /^\s*$/.test(text);
 }
 
 

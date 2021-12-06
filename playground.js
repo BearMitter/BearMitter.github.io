@@ -43,3 +43,12 @@ function shuffleArray(array) {
     }
 
 }
+
+
+
+var a = [0, 1, 2];
+var b = [1, 2, 3];
+var arr = [];
+arr.push(a);
+arr.push(b);
+console.log(arr);
