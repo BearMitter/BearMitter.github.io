@@ -4,26 +4,18 @@ title:  "Welcome to NotFound.site!"
 date:   2021-12-15 16:33:21 +0800
 categories: site info
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-Jekyll requires blog post files to be named according to the following format:
+Welcome to `NotFound.site`!
 
-`YEAR-MONTH-DAY-title.MARKUP`
+Be free to [contact me](mailto:bear@notfound.site) if you just wanna say blah blah with me.
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
-
-Jekyll also offers powerful support for code snippets:
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+{% highlight java %}
+void sayHi(var profession){
+  out.println("Hello, world! I'm a " + profession + ".");
+}
+var profession = "Software Engineer";
+sayHi(profession); // prints 'Hello, world! I'm a Software Engineer.' to STDOUT.
 {% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+Freedom is something we take for granted, but in truth it is not guaranteed. There are many sites which cannot be found in mainland China e.g.  Google, Wikipedia, YouTube, Facebook, Twitter... You can access this site only because you are outside the mainland China or this site is too dumb to be blocked.

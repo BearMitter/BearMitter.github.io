@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Code Executor</title>
+  <link href="/assets/css/bootstrap/5.0.0-beta3/bootstrap.min.css" rel="stylesheet">
+  <Style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+  </Style>
+
+  <script type="text/javascript" src="/assets/js/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/assets/js/bootstrap/5.0.0-beta3/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/assets/js/tool/math-tool.js"></script>
+
+  <link rel="icon" href="/assets/icon/favicon.ico">
+</head>
+
+<body>
+
+  <textarea class="form-control" style="min-width: 100%;height: 30%" id='ta'>
+
+  </textarea> Result:
+  <p id='pa'></p>
+  <button class="btn btn-primary" onclick='exe()'>Submit ⌘+↵</button>
+  <button class="btn btn-primary" onclick='clearTA()'>Clear ⌘+\</button>
+  <button class="btn btn-primary" onclick='loadBefore()'>Last ⌘+[</button>
+  <button class="btn btn-primary" onclick='loadAfter()'>Next ⌘+]</button>
+
+  <br>
+  <br>
+
+  <div class="container">
+    <table>
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>
+                <button id='1' class="btn btn-primary" onclick='addContent(this.id)'>1</button>
+              </td>
+              <td>
+                <button id='2' class="btn btn-primary" onclick='addContent(this.id)'>2</button>
+              </td>
+              <td>
+                <button id='3' class="btn btn-primary" onclick='addContent(this.id)'>3</button>
+              </td>
+              <td>
+                <button id='+' class="btn btn-primary" onclick='addContent(this.id)'>+</button>
+              </td>
+
+
+            </tr>
+
+            <tr>
+              <td>
+                <button id='4' class="btn btn-primary" onclick='addContent(this.id)'>4</button>
+              </td>
+              <td>
+                <button id='5' class="btn btn-primary" onclick='addContent(this.id)'>5</button>
+              </td>
+              <td>
+                <button id='6' class="btn btn-primary" onclick='addContent(this.id)'>6</button>
+              </td>
+              <td>
+                <button id='-' class="btn btn-primary" onclick='addContent(this.id)'>-</button>
+              </td>
+            </tr>
+
+            <tr>
+
+              <td>
+                <button id='7' class="btn btn-primary" onclick='addContent(this.id)'>7</button>
+              </td>
+              <td>
+                <button id='8' class="btn btn-primary" onclick='addContent(this.id)'>8</button>
+              </td>
+              <td>
+                <button id='9' class="btn btn-primary" onclick='addContent(this.id)'>9</button>
+              </td>
+              <td>
+                <button id='*' class="btn btn-primary" onclick='addContent(this.id)'>*</button>
+              </td>
+            </tr>
+
+            <tr>
+
+
+              <td>
+                <button id='.' class="btn btn-primary" onclick='addContent(this.id)'>.</button>
+              </td>
+              <td>
+                <button id='0' class="btn btn-primary" onclick='addContent(this.id)'>0</button>
+              </td>
+              <td>
+                <button id='%' class="btn btn-primary" onclick='addContent(this.id)'>%</button>
+              </td>
+
+              <td>
+                <button id='/' class="btn btn-primary" onclick='addContent(this.id)'>/</button>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+
+        <td>
+          <div style='width:20%'>
+            &nbsp;&nbsp;&nbsp;
+          </div>
+        </td>
+        <td>
+          <table>
+
+            <tr>
+              <td>
+                <button id='!' class="btn btn-primary" onclick='addContent(this.id)'>!</button>
+              </td>
+              <td>
+                <button id='&' class="btn btn-primary" onclick='addContent(this.id)'>&</button>
+              </td>
+              <td>
+                <button id='|' class="btn btn-primary" onclick='addContent(this.id)'>|</button>
+              </td>
+              <td>
+                <button id='^' class="btn btn-primary" onclick='addContent(this.id)'>^</button>
+              </td>
+            </tr>
+
+          </table>
+
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+
+  <br>
+  <button id='pow( , )' class="btn btn-primary" onclick='addContent(this.id)'>pow(x,y)</button>
+  <button id='sqrt( )' class="btn btn-primary" onclick='addContent(this.id)'>sqrt(x)</button>
+  <button id='cbrt( )' class="btn btn-primary" onclick='addContent(this.id)'>cbrt(x)</button>
+  <button id='max( , )' class="btn btn-primary" onclick='addContent(this.id)'>max(x,y...)</button>
+  <button id='min( , )' class="btn btn-primary" onclick='addContent(this.id)'>min(x,y...)</button>
+  <button id='random()' class="btn btn-primary" onclick='addContent(this.id)'>random()</button>
+
+
+  <br>
+  <br>
+  <button id='rad( )' class="btn btn-primary" onclick='addContent(this.id)'>rad(x)</button>
+  <button id='deg( )' class="btn btn-primary" onclick='addContent(this.id)'>deg(x)</button>
+  <button id='fac( )' class="btn btn-primary" onclick='addContent(this.id)'>fac(x)</button>
+  <button id='sum( )' class="btn btn-primary" onclick='addContent(this.id)'>sum(x,y...)</button>
+  <button id='avg( )' class="btn btn-primary" onclick='addContent(this.id)'>avg(x,y...)</button>
+  <button id='count( )' class="btn btn-primary" onclick='addContent(this.id)'>count(x,y...)</button>
+  <button id='stddev( )' class="btn btn-primary" onclick='addContent(this.id)'>stddev(x,y...)</button>
+
+
+  <br>
+  <br>
+  <button id='abs( )' class="btn btn-primary" onclick='addContent(this.id)'>abs(x)</button>
+  <button id='floor( )' class="btn btn-primary" onclick='addContent(this.id)'>floor(x)</button>
+  <button id='ceil( )' class="btn btn-primary" onclick='addContent(this.id)'>ceil(x)</button>
+  <button id='round( )' class="btn btn-primary" onclick='addContent(this.id)'>round(x)</button>
+  <button id='trunc( )' class="btn btn-primary" onclick='addContent(this.id)'>trunc(x)</button>
+  <button id='sign( )' class="btn btn-primary" onclick='addContent(this.id)'>sign(x)</button>
+
+
+  <br>
+  <br>
+  <button id='log( )' class="btn btn-primary" onclick='addContent(this.id)'>log(x)</button>
+  <button id='log2( )' class="btn btn-primary" onclick='addContent(this.id)'>log2(x)</button>
+  <button id='log10( )' class="btn btn-primary" onclick='addContent(this.id)'>log10(x)</button>
+  <button id='exp( )' class="btn btn-primary" onclick='addContent(this.id)'>exp(x)</button>
+  <button id='expm1( )' class="btn btn-primary" onclick='addContent(this.id)'>expm1(x)</button>
+
+  <button id='imul( , )' class="btn btn-primary" onclick='addContent(this.id)'>imul(x,y)</button>
+  <button id='hypot( )' class="btn btn-primary" onclick='addContent(this.id)'>hypot(x,y...)</button>
+  <button id='fround( )' class="btn btn-primary" onclick='addContent(this.id)'>fround(x)</button>
+  <button id='clz32( )' class="btn btn-primary" onclick='addContent(this.id)'>clz32(x)</button>
+
+  <br>
+  <br>
+  <button id='cos( )' class="btn btn-primary" onclick='addContent(this.id)'>cos(x)</button>
+  <button id='sin( )' class="btn btn-primary" onclick='addContent(this.id)'>sin(x)</button>
+  <button id='tan( )' class="btn btn-primary" onclick='addContent(this.id)'>tan(x)</button>
+  <button id='cosh( )' class="btn btn-primary" onclick='addContent(this.id)'>cosh(x)</button>
+  <button id='sinh( )' class="btn btn-primary" onclick='addContent(this.id)'>sinh(x)</button>
+  <button id='tanh( )' class="btn btn-primary" onclick='addContent(this.id)'>tanh(x)</button>
+
+
+  <br>
+  <br>
+  <button id='acos( )' class="btn btn-primary" onclick='addContent(this.id)'>acos(x)</button>
+  <button id='asin( )' class="btn btn-primary" onclick='addContent(this.id)'>asin(x)</button>
+  <button id='atan( )' class="btn btn-primary" onclick='addContent(this.id)'>atan(x)</button>
+  <button id='acosh( )' class="btn btn-primary" onclick='addContent(this.id)'>acosh(x)</button>
+  <button id='asinh( )' class="btn btn-primary" onclick='addContent(this.id)'>asinh(x)</button>
+  <button id='atanh( )' class="btn btn-primary" onclick='addContent(this.id)'>atanh(x)</button>
+  <button id='atanh2( )' class="btn btn-primary" onclick='addContent(this.id)'>atanh2(x)</button>
+
+
+
+  <br>
+  <br>
+  <button id='PI' class="btn btn-primary" onclick='addContent(this.id)'>PI</button>
+  <button id='E' class="btn btn-primary" onclick='addContent(this.id)'>E</button>
+  <button id='LN2' class="btn btn-primary" onclick='addContent(this.id)'>LN2</button>
+  <button id='LN10' class="btn btn-primary" onclick='addContent(this.id)'>LN10</button>
+  <button id='LOG2E' class="btn btn-primary" onclick='addContent(this.id)'>LOG2E</button>
+  <button id='LOG10E' class="btn btn-primary" onclick='addContent(this.id)'>LOG10E</button>
+  <button id='SQRT2' class="btn btn-primary" onclick='addContent(this.id)'>SQRT2</button>
+  <button id='SQRT1_2' class="btn btn-primary" onclick='addContent(this.id)'>SQRT1_2</button>
+
+  <script>
+
+
+    // var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    // if (isMobile) {
+    //   textArea.readonly = true;
+    // }
+
+
+
+    var hisInput = [];
+
+    var currentIndex = 0;
+
+    var textArea = document.getElementById("ta");
+
+
+    document.body.onkeydown = function (e) {
+
+
+      if (e.ctrlKey || e.metaKey) {
+        if (e.keyCode == 13) {
+          exe();
+        } else if (e.keyCode == 219) {
+          loadBefore();
+        } else if (e.keyCode == 221) {
+          loadAfter();
+        } else if (e.keyCode == 220) {
+          clearTA();
+        }
+      }
+
+
+    }
+
+    function exe() {
+      var x = document.getElementById('ta');
+      var y = document.getElementById('pa');
+      with (Math) {
+        y.innerHTML = eval(x.value.trim());
+        eval(x.value);
+      }
+      hisInput.splice(currentIndex, 0, textArea.value);
+      currentIndex++;
+
+
+    }
+
+
+
+
+
+    function loadBefore() {
+      if (currentIndex - 1 < 0) {
+        return;
+      }
+
+      if (textArea.value == hisInput[currentIndex - 1]) {
+        currentIndex--;
+      }
+
+      textArea.value = hisInput[--currentIndex];
+    }
+
+    function loadAfter() {
+
+      if (currentIndex + 1 >= hisInput.length) {
+        return;
+      }
+
+      textArea.value = hisInput[++currentIndex];
+    }
+
+
+
+    function clearTA() {
+      var lastInputValue = textArea.value;
+      textArea.value = "";
+      hisInput.push(lastInputValue);
+    }
+
+    function addContent(id) {
+      var taValue = textArea.value;
+      var start = $('#ta').prop('selectionStart');
+      textArea.value = taValue.substring(0, start) + id + taValue.substring(start, taValue.length);
+      textArea.setSelectionRange(start + id.length, start + id.length);
+      // textArea.focus();
+    }
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="/assets/js/jquery/jquery-3.2.1.min.js"></script>
+    <style type="text/css">
+        #dice {
+            height: 800px
+        }
+
+        #button {
+            width: 1000px
+        }
+    </style>l
+    <title>Roll A Dice</title>
+    <link rel="icon" href="/assets/icon/favicon.ico">
+</head>
+
+<img id="button" onclick="ran()" src="/assets/picture/dice/RollDiceButton.jpg">
+
+<img id="dice" src="/assets/picture/dice/dice.jpg">
+
+<script>
+    function ran() {
+        document.getElementById("dice").src = "/assets/picture/dice/RollADice.gif";
+        var myVar = setTimeout(ran2, 3000);
+    }
+
+    function ran2() {
+        var r = Math.floor(Math.random() * 6) + 1;
+        document.getElementById("dice").src = "/assets/picture/dice/" + r + "a.png";
+    }
+</script>
+
+</html>

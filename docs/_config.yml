@@ -21,7 +21,8 @@
 title: NotFound.site
 # email: bear@notfound.site
 description: >- # this means to ignore newlines until "baseurl:"
-  It's a site that can never be found. 
+  It's a site that can never be found. Once you found it, you overcome the impossible and become THE POSSIBLE! You find the truth of the world! You are the world! You rule the uinverse! Feel so good right? 
+  So if you have any trouble in real life, come here and and read these nonsense words.
 domain: bearmitter.github.io
 #baseurl: /docs # the subpath of your site, e.g. /blog
 url: https://bearmitter.github.io # the base hostname & protocol for your site, e.g. http://example.com
@@ -31,6 +32,39 @@ github_username:  bearmitter
 
 minima:
   skin: solarized-dark
+  social_links:
+   github:  bearmitter
+   twitter: bear_mitter
+   facebook: BearMitter
+   stackoverflow: "4007402"
+    # devto: jekyll
+    # dribbble: jekyll
+   
+    # flickr:   jekyll
+    # instagram: jekyll
+    # linkedin: jekyll
+    # pinterest: jekyll
+    # youtube: jekyll
+    # youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g
+    # youtube_channel_name: CloudCannon
+    # telegram: jekyll
+    # googleplus: +jekyll
+    # microdotblog: jekyll
+    # keybase: jekyll
+
+    # Mastodon instances
+    # mastodon:
+    # - username: jekyll
+    #   instance: example.com
+    # - username: jekyll2
+    #   instance: example.com
+
+    # GitLab instances
+    # gitlab:
+    # - username: jekyll
+    #   instance: example.com
+    # - username: jekyll2
+    #   instance: example.com
 
 # Build settings
 theme: minima
@@ -41,6 +75,9 @@ plugins:
 author:
   name: Bear Mitter
   email: "bear@notfound.site"
+
+
+
 
 # Exclude from processing.
 # The following items will not be processed, by default.

@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
+    <style type="text/css">
+        img {
+            height: 10px
+        }
+    </style>
+    <title>My Writing Converter</title>
+</head>
+
+<script>
+    function fun() {
+        var text = document.getElementById("text").value;
+        for (var i = 0; i < text.length; i++) {
+            document.write("<img src='/assets/picture/calligraph/English/" + text.charCodeAt(i) + ".jpg' height=30/>");
+        }
+    };
+
+    $(document).ready(function () {
+        $('#text').keypress(function (e) {
+            if (e.which == 13 && !e.shiftKey) {
+                fun();
+            }
+        });
+    });
+
+</script>
+<table>
+    <tr>
+
+        <td> <textarea rows=20 cols=100 id="text"></textarea></td>
+    </tr>
+    <tr>
+        <td> <button onclick="fun()">Submit</button></td>
+    </tr>
+</table>
+
+
+</html>
