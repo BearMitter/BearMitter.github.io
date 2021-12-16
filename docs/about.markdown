@@ -11,5 +11,7 @@ GitHub:
 [bearmitter][bearmitter-github] /
 [bearmitter.github.io](https://github.com/BearMitter/BearMitter.github.io).
 
+Freedom is something we take for granted, but in truth it is not guaranteed. There are many sites which cannot be found in mainland China e.g.  Google, Wikipedia, YouTube, Facebook, Twitter... You can access this site only because you are outside the mainland China or this site is too dumb to be blocked.
+
 
 [bearmitter-github]: https://github.com/BearMitter
