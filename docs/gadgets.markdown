@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Gadgets
-permalink: /gadgets/
+permalink: /gadgets
 ---
 
 
