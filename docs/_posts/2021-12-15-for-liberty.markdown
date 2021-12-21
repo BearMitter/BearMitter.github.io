@@ -19,4 +19,4 @@ My love.”
 
 ― Sándor Petőfi
 
-<img src='https://images.gr-assets.com/authors/1218815624p4/198536.jpg'>
+<img src='/assets/picture/posts/sandor_petofi.jpg'>
