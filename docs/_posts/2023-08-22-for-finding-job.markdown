@@ -1,22 +1,9 @@
 ---
 layout: post
-title:  "For liberty"
-date:   2021-12-16 11:33:21 +0800
+title:  "只今仕事を探し始めた、頑張れ！"
+date:   2023-08-22 21:23:29 +0900
 categories: site info
 ---
 
-“Liberty and love
 
-These two I must have.
-
-For my love I’ll sacrifice
-
-My life.
-
-For liberty I’ll sacrifice
-
-My love.”
-
-― Sándor Petőfi
-
-<img src='/assets/picture/posts/sandor_petofi.jpg'>
+Good luck to me :)
