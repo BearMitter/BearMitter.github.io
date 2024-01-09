@@ -1,0 +1,154 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="../assets/js/jquery/jquery-3.2.1.min.js"></script>
+    <style type="text/css">
+        img {
+            height: 80px
+        }
+
+        textarea {
+  width: 100%;
+  height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+    </style>
+    <title>My Writing Converter</title>
+</head>
+
+<body>
+
+    <table style="width:100%;height:15%">
+        <tr style="width:100%;height:20%">
+
+            <td> <textarea  id="text" ></textarea></td>
+        </tr>
+        <tr style="width:100%;height:80%">
+            <td> <button onclick="fun() " style="width:100%;height:100px">Submit</button></td>
+        </tr>
+    </table>
+
+    <div id="div">
+        <table style="width:100%" id="results">
+        </table>
+
+        <p id ='resultSize'></p>
+
+
+    </div>
+
+
+</body>
+
+
+<script>
+
+
+
+
+
+    function fun() {
+        var text = document.getElementById("text").value;
+        // for (var i = 0; i < text.length; i++) {
+        //     document.write("<img src='../assets/picture/calligraph/English/" + text.charCodeAt(i) + ".jpg' height=30/>");
+        // }
+
+
+        var folder = "../assets/picture/milkCollection";
+
+        var results = document.getElementById("results");
+
+
+        $.ajax({
+            url: folder,
+            success: function (data) {
+
+                var count = 0;
+
+                var tableContents = "";
+
+
+                $(data).find("a").attr("href", function (i, val) {
+
+                    val = decodeURIComponent(val);
+
+
+                    var regex = new RegExp(".*" + text + ".*", 'g');
+
+
+                    if (text == ''
+                        && val.match(/\.(JPG|png|gif)$/)
+                        ||
+
+                        text != '' &&
+
+                        (val.match(/\.(JPG|png|gif)$/) && val.replace(/.*\//, "").match(regex))
+
+                    ) {
+                       
+
+                            console.log(count);
+
+                            tableContents +=
+
+                                (count % 7 == 0 ? "<tr>" : "") + "<td><img src='" + val + "'height=70/> <p> " + val.replace(/.*\//, "").replace(/.JPG/, "") + "</p></td>"
+
+                                + (count % 7 == 6 ? "</tr>" : "")
+                                ;
+
+                            count++;
+
+                        }
+
+                });
+
+                results.innerHTML = tableContents;
+
+                var resultSize = document.getElementById("resultSize");
+                resultSize.innerHTML="Total:"+count+"";
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+    };
+
+    // $(document).ready(
+
+
+
+
+
+    //     function () {
+
+
+
+    //         $('#text').keypress(function (e) {
+    //             if (e.which == 13 && !e.shiftKey) {
+    //                 fun();
+    //             }
+    //         });
+
+
+
+    //     });
+
+</script>
+
+
+
+</html>

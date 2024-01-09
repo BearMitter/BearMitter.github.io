@@ -14,3 +14,5 @@ permalink: /gadgets
 [Roll A Dice](/random)
 
 [Handwritings](/handwriting)
+
+[Milk Collection](/milkCollection)
