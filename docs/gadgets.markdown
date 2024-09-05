@@ -16,3 +16,5 @@ permalink: /gadgets
 [Handwritings](/handwriting)
 
 [Milk Collection](/milkCollection)
+
+[Local Time](/time)
