@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACT Timestamp Randomizer</title>
+  <style>
+    :root {
+      --green50: rgba(0, 180, 0, 0.5);
+      --text: #f5f7fa;
+      --shadow: rgba(0, 0, 0, 0.6);
+      --panel: rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "JetBrains Mono", "Fira Code", "Menlo", monospace;
+      color: var(--text);
+      background: linear-gradient(var(--green50), var(--green50));
+      overflow: hidden;
+      position: relative;
+    }
+
+    #timestamp-bg {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(28px, 7vw, 92px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(190, 255, 205, 0.86);
+      text-shadow: 0 0 10px rgba(25, 120, 50, 0.55), 0 0 24px rgba(170, 255, 190, 0.45);
+      user-select: none;
+      z-index: 0;
+      white-space: nowrap;
+      padding: 0 16px;
+      text-align: center;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      backdrop-filter: blur(1px);
+    }
+
+    .half {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: var(--panel);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .half:last-child {
+      border-bottom: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #dice {
+      font-size: clamp(72px, 20vw, 220px);
+      font-weight: 800;
+      line-height: 1;
+      text-shadow: 0 6px 18px var(--shadow);
+    }
+
+    #shuffle {
+      font-size: clamp(20px, 3.4vw, 44px);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      word-break: break-all;
+      text-align: center;
+      max-width: min(95vw, 1400px);
+      text-shadow: 0 4px 12px var(--shadow);
+    }
+  </style>
+</head>
+<body>
+  <div id="timestamp-bg"></div>
+  <div class="content">
+    <section class="half">
+      <div id="dice"></div>
+    </section>
+    <section class="half">
+      <div id="shuffle"></div>
+    </section>
+  </div>
+
+  <script>
+    const timestampEl = document.getElementById("timestamp-bg");
+    const diceEl = document.getElementById("dice");
+    const shuffleEl = document.getElementById("shuffle");
+    const baseChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    function getActNow() {
+      // ACT requested as timezone; using Australia/Adelaide (Australian Central Time).
+      return new Date(new Date().toLocaleString("en-US", { timeZone: "Australia/Adelaide" }));
+    }
+
+    function formatActTimestamp(date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, "0");
+      const d = String(date.getDate()).padStart(2, "0");
+      const hh = String(date.getHours()).padStart(2, "0");
+      const mm = String(date.getMinutes()).padStart(2, "0");
+      const ss = String(date.getSeconds()).padStart(2, "0");
+      return `${y}-${m}-${d}T${hh}:${mm}:${ss}`;
+    }
+
+    function fisherYatesShuffle(str) {
+      const arr = str.split("");
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr.join("");
+    }
+
+    function updateTimestamp() {
+      timestampEl.textContent = formatActTimestamp(getActNow());
+    }
+
+    function updateRandoms() {
+      diceEl.textContent = String(Math.floor(Math.random() * 6) + 1);
+      shuffleEl.textContent = fisherYatesShuffle(baseChars);
+    }
+
+    function scheduleFiveSecondAlignedUpdates() {
+      const now = getActNow();
+      const ms = now.getMilliseconds();
+      const sec = now.getSeconds();
+      const delay = ((5 - (sec % 5)) % 5) * 1000 - ms;
+      const firstDelay = delay <= 0 ? delay + 5000 : delay;
+
+      setTimeout(() => {
+        updateRandoms();
+        setInterval(updateRandoms, 5000);
+      }, firstDelay);
+    }
+
+    updateTimestamp();
+    updateRandoms();
+    setInterval(updateTimestamp, 1000);
+    scheduleFiveSecondAlignedUpdates();
+  </script>
+</body>
+</html>

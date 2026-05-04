@@ -18,3 +18,5 @@ permalink: /gadgets
 [Milk Collection](/milkCollection)
 
 [Local Time](/time)
+
+[Real-Time Random Dice And String](/rand)
