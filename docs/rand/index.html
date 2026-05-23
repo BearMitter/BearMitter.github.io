@@ -86,7 +86,8 @@
   </style>
 </head>
 <body>
-  <div id="timestamp-bg"></div>
+  <div id="timestamp-bg">Loading online time...</div>
+
   <div class="content">
     <section class="half">
       <div id="dice"></div>
@@ -100,34 +101,32 @@
     const timestampEl = document.getElementById("timestamp-bg");
     const diceEl = document.getElementById("dice");
     const shuffleEl = document.getElementById("shuffle");
-    const baseChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const actFormatter = new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Australia/Adelaide",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false
-    });
 
-    let serverOffsetMs = 0;
+    const baseChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    let serverBaseMs = 0;
+    let performanceBaseMs = 0;
+    let timeReady = false;
+    let onlineTimeOk = false;
     let lastSlotKey = "";
 
     function getCorrectedNow() {
-      return new Date(Date.now() + serverOffsetMs);
+      return new Date(serverBaseMs + (performance.now() - performanceBaseMs));
+    }
+
+    function pad2(num) {
+      return String(num).padStart(2, "0");
     }
 
     function formatActParts(date) {
-      const parts = actFormatter.formatToParts(date);
-      const map = {};
-      for (const part of parts) {
-        if (part.type !== "literal") {
-          map[part.type] = part.value;
-        }
-      }
-      return map;
+      return {
+        year: String(date.getFullYear()),
+        month: pad2(date.getMonth() + 1),
+        day: pad2(date.getDate()),
+        hour: pad2(date.getHours()),
+        minute: pad2(date.getMinutes()),
+        second: pad2(date.getSeconds())
+      };
     }
 
     function formatActTimestamp(date) {
@@ -137,15 +136,18 @@
 
     function hashString(str) {
       let h = 2166136261;
+
       for (let i = 0; i < str.length; i++) {
         h ^= str.charCodeAt(i);
         h = Math.imul(h, 16777619);
       }
+
       return h >>> 0;
     }
 
     function mulberry32(seed) {
       let t = seed >>> 0;
+
       return function() {
         t += 0x6D2B79F5;
         let x = Math.imul(t ^ (t >>> 15), 1 | t);
@@ -156,10 +158,12 @@
 
     function fisherYatesShuffle(str, randomFn) {
       const arr = str.split("");
+
       for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(randomFn() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
+
       return arr.join("");
     }
 
@@ -180,9 +184,17 @@
     }
 
     function tick() {
+      if (!timeReady || !onlineTimeOk) {
+        timestampEl.textContent = "Load time failed";
+        return;
+      }
+
       const now = getCorrectedNow();
+
       updateTimestamp();
+
       const slotKey = getSlotKey(now);
+
       if (slotKey !== lastSlotKey) {
         lastSlotKey = slotKey;
         updateRandomsForSlot(slotKey);
@@ -191,29 +203,41 @@
 
     async function syncServerTime() {
       try {
-        const response = await fetch(window.location.href, {
-          method: "HEAD",
+        const response = await fetch("https://time.now/developer/api/timezone/Australia/Adelaide", {
           cache: "no-store"
         });
-        const dateHeader = response.headers.get("Date");
-        if (!dateHeader) {
+
+        if (!response.ok) {
+          onlineTimeOk = false;
+          timestampEl.textContent = "Load time failed";
           return;
         }
-        const serverMs = Date.parse(dateHeader);
-        if (Number.isNaN(serverMs)) {
-          return;
+
+        const data = await response.json();
+        const serverMs = Date.parse(data.datetime);
+
+        if (!Number.isNaN(serverMs)) {
+          serverBaseMs = serverMs;
+          performanceBaseMs = performance.now();
+          timeReady = true;
+          onlineTimeOk = true;
+        } else {
+          onlineTimeOk = false;
+          timestampEl.textContent = "Load time failed";
         }
-        serverOffsetMs = serverMs - Date.now();
       } catch (error) {
-        // If time sync fails, page continues with local clock.
+        onlineTimeOk = false;
+        timestampEl.textContent = "Load time failed";
       }
     }
 
     async function init() {
       await syncServerTime();
+
       tick();
+
       setInterval(tick, 1000);
-      setInterval(syncServerTime, 60000);
+      setInterval(syncServerTime, 5000);
     }
 
     init();
